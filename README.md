@@ -1,7 +1,7 @@
 # CMPUT410-Lab5
 
 # Dependencies
-Flask
+pip install https://github.com/mitsuhiko/flask/tarball/master
 
 # Running Instructions
 cd taskr
