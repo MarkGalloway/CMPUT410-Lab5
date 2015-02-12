@@ -1,11 +1,11 @@
 # CMPUT410-Lab5
 
 # Dependencies
-Flask
+pip install https://github.com/mitsuhiko/flask/tarball/master
 
 # Running Instructions
 cd taskr
-flask --app=taskr initdb
+flask --app=taskr initdb    
 python taskr.py
 
 # Viewing Instructions
