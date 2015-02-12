@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
+  {% if session.logged_in %}
     <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
       <dl>
         <dt><pre>Category:    </pre><input type=text name=category>
@@ -8,19 +9,34 @@
         <dd><input type=submit value=Add>
       </dl>
     </form>
+  {% endif %}
 
-  <table border="1" cellpadding="3">
+  <table>
+    <colgroup>
+        <col class="col_category">
+        <col class="col_priority">
+        <col class="col_description">
+        <col class="col_op">
+    </colgroup>
+    <tbody>
         <tr>
-          <th>Category</th>
-          <th>Priority</th>
-          <th>Description</th>
-        <tr/>
+            <th>Category</th><th>Priority</th><th>Description</th><th>Operation</th>
+        <tr>
         {% for entry in entries %}
-        <tr>
-            <td>{{ entry.category }}
-            <td>{{ entry.priority }}
-            <td>{{ entry.description }}
-        </tr>
+            <tr>
+                <td>{{ entry['category'] }}</td>
+                <td>{{ entry['priority'] }}</td>
+                <td>{{ entry['description'] }}</td>
+                <td>
+                {% if session.logged_in %}
+                <form class="operation_form" action="{{ url_for('delete_entry')}}" method=post>
+                    <input type="hidden" name=Id value="{{ entry['id'] }}">
+                    <input type=submit value=Delete>
+                </form>
+                {% endif %}
+                </td>
+
         {% endfor %}
+    </tbody>
   </table>
 {% endblock %}
